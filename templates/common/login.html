@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container my-5">
+        <h3 class="my-3">Login</h3>
+        <hr>
+        <form method="post" class="post-form" action="{% url 'common:login' %}">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="form-group row my-3 mx-5 justify-content-start">
+                <div class="col col-3 text-end">
+                    <label for="username">User ID</label>
+                </div>
+                <div class="col col-5 text-start" style="max-width: 300px;">
+                    <input type="text" class="form-control w-1" name="username" id="username"
+                        value="{{ form.username.value|default_if_none:'' }}">
+                </div>
+            </div>
+            <div class="form-group row my-3 mx-5 justify-content-start">
+                <div class="col col-3 text-end">
+                    <label for="password">Password</label>
+                </div>
+                <div class="col col-5 text-start" style="max-width: 300px;">
+                    <input type="text" class="form-control" name="password" id="password"
+                        value="{{ form.password.value|default_if_none:'' }}">
+                </div>
+            </div>
+            <div class="form-group row my-3 mx-5 justify-content-center">
+                <div class="col col-8 ">
+                    <button class="btn btn-secondary" type="submit">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
