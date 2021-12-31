@@ -1,22 +1,8 @@
-
 {% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-        <div class="toast bg-dark" data-bs-delay="2000" role="alert" aria-live="off" aria-atomic="true"
-            style="position: absolute; bottom: 10%; right: 5%;">
-            <div class="toast-header">
-                <strong>{{ field.label }}</strong>
+            <div class="alert alert-fixed rounded alert-secondary alert-dismissible fade show" role="alert">
+                <strong>
+                    {{ form.errors }}
+                </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="toast-body ">
-                {{ error }}
-            </div>  
-        </div>
-        </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-    <div class="alert alert-danger">
-        <strong>{{ error }}</strong>
-    </div>
-    {% endfor %}
 {% endif %}

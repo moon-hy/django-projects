@@ -12,3 +12,9 @@
 body{
   color: whitesmoke;
 }
+.alert-fixed {
+  position: fixed;
+  margin-left: 3%;
+  margin-top: 3%;
+  z-index:9999; 
+}

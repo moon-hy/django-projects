@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from board.models import Answer, Question
+from board.models import Comment, Question
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -8,12 +8,12 @@ class QuestionForm(forms.ModelForm):
         fields = ['subject', 'content']
         labels = {
             'subject': 'Subject',
-            'content': 'Content'
+            'content': 'Content',
         }
 
-class AnswerForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = Answer
+        model = Comment
         fields = ['content']
         labels ={
             'content': 'Content',

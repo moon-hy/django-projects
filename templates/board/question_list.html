@@ -1,29 +1,45 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load board_filter %}
-{%block content%}
-<div class="container container-fluid mt-5">
+{% block content %}
+<div class="container container-fluid py-5">
     <table class="table table-hover table-dark">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th class="col-1">#</th>
                 <th class="col">Subject</th>
-                <th class="col-3">Date</th>
+                <th class="col-2">Author</th>
+                <th class="col-2">Date</th>
             </tr>
         </thead>
         <tbody>
             {%if question_list %}
             {%for question in question_list %}
-            <tr>
-                <td>
-                    {{question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter|add:1}}
+            <!-- Lists -->
+            <tr class=" align-middle">
+                <!-- ID -->
+                <td class="text-center">
+                    {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter|add:1 }}
                 </td>
+                <!-- 제목 -->
                 <td>
-                    <a href="{% url 'board:detail' question.id%}" class="text-light text-decoration-none">{{question.subject}}</a>
-                    {% if question.answer_set.count > 0 %}
-                        <span class="text-danger small ml-2">[{{question.answer_set.count}}]</span>
+                    <a href="{% url 'board:detail' question.id %}" class="text-light text-decoration-none">
+                        {{ question.subject }}
+                    </a>
+                    <!-- 댓글 갯수 -->
+                    {% if question.comment_set.count > 0 %}
+                        <span class="text-danger small ml-2">
+                            [{{ question.comment_set.count }}]
+                        </span>
                     {% endif %}
                 </td>
-                <td class="text-muted small">{{question.create_date}}</td>
+                <!-- 작성자 -->
+                <td class="text small text-center">
+                    {{ question.author }}
+                </td>
+                <!-- 작성일자 -->
+                <td class="text-muted text-center small">
+                    {{ question.create_date|date:'Y.m.d. a h:i' }}
+                </td>
             </tr>
             {%endfor%}
             {%else%}
@@ -92,4 +108,4 @@
     </ul>
     <a href="{%url 'board:question_create'%}" class="btn btn-primary">글쓰기</a>
 </div>
-{%endblock%}
+{% endblock %}

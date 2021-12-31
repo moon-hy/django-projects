@@ -7,17 +7,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
-        <!-- Login Form -->
+        <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'style.css' %}">
-
+        <!-- Icon -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
         <title>Hello, World!</title>
     </head>
     <body class="bg-dark">
-        {% include "navbar.html" %}
-        {%block content%}
-        {%endblock%}
+        {% include "navbar.html"%}
+        {% block content %}
+        {% endblock %}
+        
+        <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+        <script src="{% static 'bootstrap.min.js' %}"></script>
+        {% block script %}
+        {% endblock %}
     </body>
-
-    <script src="{% static 'bootstrap.min.js' %}"></script>
-
 </html>

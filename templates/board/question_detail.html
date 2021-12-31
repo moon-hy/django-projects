@@ -1,10 +1,10 @@
-<!-- Question, Answer -->
+<!-- Question, Comment -->
 {%extends 'base.html'%}
 {%block content%}
-<div class="container container-fluid my-5">
+<div class="container border border-secondary rounded-3 container-fluid mt-5 p-5">
     
     <!-- content -->
-    <div class="row border-dark border-bottom">
+    <div class="row">
         <div class="col">
             <h1 class="h2">{{question.subject}}</h1>
         </div>
@@ -12,45 +12,100 @@
             <small>{{question.create_date}}</small>
         </div>
     </div>
-    <!-- 댓글 목록 -->
-    <div class="container container-fluid my-5">
+
+    <!-- 수정 -->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+    {% for message in messages %}
+        <strong>{{ message.tags }}</strong>
+        <ul><li>{{ message.message }}</li></ul>
+    {% endfor %}
+    </div>
+
+    {% endif %}
+    <span class="small text">
+        <span class="text-muted">Author:</span> 
+        {{ question.author }} 
+        <!-- 수정/ 삭제-->
+        {% if question.author == request.user %}
+        <a href="{% url 'board:question_modify' question.id  %}" 
+        class="text-decoration-none text-warning small">[Modify]</a>
+        
+        <a href="#" class="delete text-warning text-decoration-none small"
+        data-uri="{% url 'board:question_delete' question.id %}">[Delete]</a>
+        {% endif %}
+    </span>
+
+    <!-- 내용 -->
+    <div class="container border-bottom border-top container-fluid py-5 mt-3 mx-auto">
         {{question.content}}
     </div>
-    <div class="container container-fluid border-dark border-top py-3">
-        <dl class="row border-bottom">
-            {%for answer in question.answer_set.all%}
-            <dt class="col-sm-3">ID</dt>
-            <dd class="col-sm-9">{{answer.content}}</dd>
-            {%endfor%}
-        </dl>
-    </div>
-    <!-- 댓글 추가 -->
-    <div class="container container-fluid">
-        <form action="{% url 'board:answer_create' question.id %}" method="post">
-            {% csrf_token %}
-            {% if form.errors %}
-            <div class="alert alert-danger" role="alert">
-                {% for field in form %}
-                    {% if field.errors %}
-                        <strong>{{field.label}}</strong>
-                        {{field.errors}}
-                    {% endif %}
-                {% endfor %}
+
+    <!-- 댓글 목록 -->
+    <div class="container container-fluid pt-3 px-4">
+        <h5 class="text pb-3">
+            <strong>Comments</strong>
+        </h5>
+        {%for comment in question.comment_set.all%}
+        <dl class="row rounded-3 border-bottom py-3" style="background: #333333;">
+            <div class="col row position-relative">
+                <dt class="ms-1">
+                    <!-- if click comment, reply -->
+                    <a href="#" class="stretched-link"></a>
+                    {{ comment.author }}
+                </dt>
+                
+                <dd class="col-sm text-wrap text-break">
+                    {{ comment.content }}
+                </dd>
+                <dd class="small col-sm-3">
+                {{ comment.create_date }}    
+                </dd>
             </div>
-            {% endif %}
-            <label for="content" class="form-label">Content</label>
+            <!-- 삭제 -->
+            <div class="col-1 text-end pe-3">
+                {% if comment.author == request.user %}
+                <a href="#" class="delete text-decoration-none text-white"
+                data-uri="{% url 'board:comment_delete' comment.id %}">
+                <i class="far fa-trash-alt"></i>
+                </a>
+                {% endif %}
+            </div>
+        </dl>
+    </p>
+        {%endfor%}
+    </div>
+    <!-- 댓글 달기 -->
+    <div class="container container-fluid border-top pt-3">
+        <form action="{% url 'board:comment_create' question.id %}" method="post">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <label for="content" class="form-label">Reply</label>
             <div class="row justify-content-center">
-                <div class="col-10">
-                    <textarea class="form-control" name="content" id="content" rows="3" style="resize: none;"></textarea>
+                <div class="col-11">
+                    <textarea 
+                    {% if not user.is_authenticated %}disabled placeholder="Need login"{% endif %}
+                    placeholder="Content" class="form-control" name="content" 
+                    id="content" rows="3" style="resize: none;"></textarea>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-10 text-end">
+            <div class="row pt-3">
+                <div class="col-11 text-end">
                     <button type="submit" class="btn btn-outline-light">Submit</button>
                 </div>
             </div>
-            <hr>
         </form>
     </div>
 </div>
-{%endblock%}
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $(".delete").on('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = $(this).data('uri');
+            }
+        });
+    });
+</script>
+{% endblock %}

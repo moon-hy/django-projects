@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Answer, Question
+from .models import Comment, Question
 # Register your models here.
 
-@admin.register(Question,Answer)
+@admin.register(Question,Comment)
 class QuestionAdmin(admin.ModelAdmin):
     search_fields = ['subject', 'content']
 
