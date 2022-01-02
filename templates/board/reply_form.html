@@ -1,0 +1,24 @@
+<!-- Reply To -->
+<div class="container container-fluid border-top pt-3">
+    <form action="{% url 'board:comment_create' post.id %}" method="post">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <!-- Header -->
+        <label for="content" class="form-label">Reply</label>
+        <!-- Input Area -->
+        <div class="row justify-content-center">
+            <div class="col-11">
+                <textarea 
+                {% if not user.is_authenticated %}disabled placeholder="Need login"{% endif %}
+                placeholder="Content" class="form-control" name="content" 
+                id="content" rows="3" style="resize: none;"></textarea>
+            </div>
+        </div>
+        <!-- Submit Button -->
+        <div class="row pt-3">
+            <div class="col-11 text-end">
+                <button type="submit" class="btn btn-outline-light">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

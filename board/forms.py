@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import widgets
-from board.models import Comment, Question
+from board.models import Comment, Post
 
-class QuestionForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
-        model = Question
+        model = Post
         fields = ['subject', 'content']
         labels = {
             'subject': 'Subject',

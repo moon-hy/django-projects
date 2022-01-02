@@ -1,17 +1,46 @@
-{% extends 'base.html' %}
 
-{% block content %}
-<div class="container my-3">
-    <h5 class="border-bottom pb-2">댓글등록하기</h5>
-    <form method="post" class="post-form my-3">
-        {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="form-group">
-            <label for="content">댓글내용</label>
-            <textarea class="form-control"name="content" id="content" 
-                      rows="3">{{ form.content.value|default_if_none:'' }}</textarea>
+<!-- Comment List -->
+<div class="container container-fluid pt-3 px-4">
+    <!-- Header -->
+    <h5 class="text pb-3">
+        <strong>Comments</strong>
+    </h5>
+
+    <!-- Comment Items -->
+    {% if post.comment_set.count %}
+        {%for comment in post.comment_set.all%}
+        <dl class="row rounded-3 border-bottom py-3" style="background: #333333;">
+            <!-- if click Comment, Reply -->
+            <div class="col row position-relative">
+                <!-- Logic when Clicked -->
+                <dt class="ms-1">
+                    <a href="#" class="stretched-link"></a>
+                    {{ comment.author }}
+                </dt>
+                
+                <!-- Content -->
+                <dd class="col-sm text-wrap text-break">
+                    {{ comment.content }}
+                </dd>
+                <!-- Create Date-->
+                <dd class="small col-sm-3">
+                    {{ comment.create_date }}    
+                </dd>
+            </div>
+            <!-- Delete Icon -->
+            <div class="col-1 text-end pe-3">
+                {% if comment.author == request.user %}
+                    <a href="#" class="delete text-decoration-none text-white"
+                        data-uri="{% url 'board:comment_delete' comment.id %}">
+                    <i class="far fa-trash-alt"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </dl>
+    {%endfor%}
+    {% else %}
+        <div class="container-flud text-center pb-3">
+            No Comment.
         </div>
-        <button type="submit" class="btn btn-primary">저장하기</button>
-    </form>
+    {% endif %}
 </div>
-{% endblock %}
