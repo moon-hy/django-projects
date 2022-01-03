@@ -20,7 +20,7 @@ def post_create(request):
             return redirect('board:index')
     else:
         form = PostForm()
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'board/post_create_form.html', context)
 
 @login_required(login_url='common:login')

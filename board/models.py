@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 
 # Create your models here.
+class BaseModel(models.Model):
+    create_time = models.DateTimeField(auto_now_add=True)
+    modify_date = models.DateTimeField(auto_now=True)
+
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET('Deleted:User'), related_name='author_post')
     subject = models.CharField(max_length=100)

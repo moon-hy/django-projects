@@ -1,5 +1,4 @@
 <!-- Post Header -->
-{{ post.update_hits }}
 <div class="row">
     <!-- Subject -->
     <div class="col">
@@ -25,18 +24,52 @@
     <span class="text-muted">Author:</span> 
     {{ post.author }} 
 
-    {% if post.author == request.user %}
-    <a href="{% url 'board:post_modify' post.id  %}" 
-    class="text-decoration-none text-warning small">[Modify]</a>
-    
-    <a href="#" class="delete text-warning text-decoration-none small"
-    data-uri="{% url 'board:post_delete' post.id %}">[Delete]</a>
+    {% if post.author == request.user %}    
+    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+        data-bs-target="#postModify">
+        Modify
+    </button>
+    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+        data-bs-target="#postDelete">
+        Delete
+    </button>
+    <!-- Modal popup-->
+    <div class="modal fade" id="postModify" tabindex="-1" aria-labelledby="postModifyLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="postModifyLabel">Are you sure ?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a class="btn btn-primary"
+              href="{% url 'board:post_modify' post.id  %}">Yes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="modal fade" id="postDelete" tabindex="-1" aria-labelledby="postDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="postDeleteLabel">Are you sure ?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a class="btn btn-primary"
+              href="{% url 'board:post_delete' post.id  %}">Yes</a>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endif %}
 </span>
 
 <!-- Content -->
 <div class="container border-bottom border-top container-fluid py-5 mt-3 mx-auto">
-    {{post.content}}
+    {{ post.content|safe|linebreaksbr}}
 </div>
 
 <!-- Likes -->

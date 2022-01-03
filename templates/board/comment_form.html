@@ -30,10 +30,26 @@
             <!-- Delete Icon -->
             <div class="col-1 text-end pe-3">
                 {% if comment.author == request.user %}
-                    <a href="#" class="delete text-decoration-none text-white"
-                        data-uri="{% url 'board:comment_delete' comment.id %}">
-                    <i class="far fa-trash-alt"></i>
-                    </a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteComment">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    <!-- Modal popup-->
+                    <div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="modifyModalLabel">Are you sure ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a class="btn btn-primary"
+                                        href="{% url 'board:comment_delete' comment.id  %}">Yes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
         </dl>

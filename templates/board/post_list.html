@@ -3,18 +3,18 @@
 {% block content %}
 <div class="container position-relative py-5">
     <div class="row justify-content-between my-3">
-    <div class="inline-block col-2">
-        <select class="form-control so">
-            <option value="recent" {% if so == 'recent' %}selected{% endif %}>Recent</option>
-            <option value="like" {% if so == 'like' %}selected{% endif %}>Like</option>
-            <option value="hit" {% if so == 'hit' %}selected{% endif %}>Hit</option>
-            <option value="comment" {% if so == 'comment' %}selected{% endif %}>Comment</option>
-        </select>
+        <div class="inline-block col-4 col-sm-2">
+            <select class="form-control so">
+                <option value="recent" {% if so == 'recent' %}selected{% endif %}>Recent</option>
+                <option value="like" {% if so == 'like' %}selected{% endif %}>Like</option>
+                <option value="hit" {% if so == 'hit' %}selected{% endif %}>Hit</option>
+                <option value="comment" {% if so == 'comment' %}selected{% endif %}>Comment</option>
+            </select>
+        </div>
+        <div class="col text-end pb-3">
+            <a href="{%url 'board:post_create'%}" class="btn btn-primary">글쓰기</a>
+        </div>
     </div>
-    <div class="col text-end pb-3">
-        <a href="{%url 'board:post_create'%}" class="btn btn-primary">글쓰기</a>
-    </div>
-</div>
     <table class="table table-hover table-dark">
         <thead>
             <tr class="text-center">

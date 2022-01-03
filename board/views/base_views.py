@@ -1,7 +1,8 @@
+from django.core.checks import messages
 from board.models import Post
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 
 def index(request):
     page = request.GET.get('page', '1')
@@ -33,6 +34,11 @@ def index(request):
     return render(request, 'board/post_list.html', context)
 
 def detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    try:
+        post = Post.objects.get(pk=post_id)
+    except:
+        
+        return redirect('board:index')
+    #post = get_object_or_404(Post, pk=post_id)
     context = {'post': post}
     return render(request, 'board/post_detail.html', context)
