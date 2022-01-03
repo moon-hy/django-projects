@@ -4,10 +4,10 @@
 ### **구현 내용**
 
 #### **Model 정의**
-[##_Image|kage@bfLnLD/btrpHFqlsJT/5KL49I7IK8JJrwNL8D3nm0/img.png|CDM|1.3|{"originWidth":821,"originHeight":573,"style":"alignCenter"}_##]
+![image](https://user-images.githubusercontent.com/94369511/147909455-d868bcbf-39d9-40e3-b42b-c11193e0c5b1.png)
 
 #### **메인 화면**
-[##_Image|kage@bLLmYq/btrpus696Ci/Qr64I0phu4ewhsR3mEMkwk/img.png|CDM|1.3|{"originWidth":1233,"originHeight":481,"style":"alignCenter"}_##]
+![image](https://user-images.githubusercontent.com/94369511/147909437-beb12cb6-36e1-4816-8b30-e8a8696040c4.png)
 -   상단 바
     -   메인 화면으로 이동, 로그인/로그아웃, 메뉴 버튼
     -   메뉴 버튼: 오프캔버스 메뉴, 메뉴 리스트는 언제든지 쉽게 변경할 수 있도록 html 분리
@@ -20,7 +20,7 @@
     -   검색: 게시글, 내용, 작성자, 댓글에서 검색
 
 #### **게시글**
-[##_Image|kage@by8OYu/btrpzJUXDJR/kpFnDf01H6i3BGbHfWZN6k/img.png|CDM|1.3|{"originWidth":1007,"originHeight":872,"style":"alignCenter"}_##]
+![image](https://user-images.githubusercontent.com/94369511/147909449-a5645445-7813-47c0-889f-07143894d440.png)
 
 -   게시글
     -   제목, 작성 일시, 작성자, 수정/삭제 버튼
