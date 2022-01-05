@@ -20,7 +20,7 @@ def comment_create(request, post_id):
             notification.save()
             for query in post.comment_set.all().values('author').distinct():
                 target_user = User.objects.get(pk=query['author'])
-                if request.user != target_user:
+                if request.user!=target_user and post.author!=target_user:
                     Notification(user=target_user, post=post, invoke=request.user).save()
             return redirect('board:detail', post_id=post_id)
     else:
