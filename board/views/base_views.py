@@ -1,5 +1,6 @@
 from django.core.checks import messages
-from board.models import Post
+from django.utils import timezone
+from board.models import Post, Notification, User
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
@@ -30,14 +31,17 @@ def index(request):
     paginator = Paginator(post_list, 10)
     page_obj = paginator.get_page(page)
 
-    context = {'post_list': page_obj, 'page': page, 'kw': kw, 'so': so}
+    context = {'posts': page_obj, 'page': page, 'kw': kw, 'so': so}
     return render(request, 'board/post_list.html', context)
 
 def detail(request, post_id):
     try:
         post = Post.objects.get(pk=post_id)
+        notifications = Notification.objects.filter(read_date__isnull=True).filter(user=request.user).filter(post=post)
+        for notification in notifications:
+            notification.read_date = timezone.now()
+            notification.save()
     except:
-        
         return redirect('board:index')
     #post = get_object_or_404(Post, pk=post_id)
     context = {'post': post}

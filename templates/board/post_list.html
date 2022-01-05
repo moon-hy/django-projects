@@ -4,7 +4,7 @@
 <div class="container position-relative py-5">
     <div class="row justify-content-between my-3">
         <div class="inline-block col-4 col-sm-2">
-            <select class="form-control so">
+            <select class="form-control so" tabindex="-1">
                 <option value="recent" {% if so == 'recent' %}selected{% endif %}>Recent</option>
                 <option value="like" {% if so == 'like' %}selected{% endif %}>Like</option>
                 <option value="hit" {% if so == 'hit' %}selected{% endif %}>Hit</option>
@@ -18,22 +18,22 @@
     <table class="table table-hover table-dark">
         <thead>
             <tr class="text-center">
-                <th class="col-1">#</th>
-                <th class="col">Subject</th>
-                <th class="col-2">Author</th>
-                <th class="col-2">Date</th>
-                <th class="col-1">Hits</th>
-                <th class="col-1">Like</th>
+                <th class="col-1">번호</th>
+                <th class="col">제목</th>
+                <th class="col-2">글쓴이</th>
+                <th class="col-2">작성일</th>
+                <th class="col-1">조회</th>
+                <th class="col-1">추천</th>
             </tr>
         </thead>
         <tbody>
         <!-- Post List -->
-        {%if post_list %}
-            {%for post in post_list %}
-            <tr class=" align-middle">
+        {%if posts %}
+            {%for post in posts %}
+            <tr class="align-middle">
                 <!-- Post ID -->
                 <td class="text-center">
-                    {{ post_list.paginator.count|sub:post_list.start_index|sub:forloop.counter|add:1 }}
+                    {{ posts.paginator.count|sub:posts.start_index|sub:forloop.counter|add:1 }}
                 </td>
                 <!-- Subject -->
                 <td>
@@ -49,7 +49,10 @@
                 </td>
                 <!-- Author -->
                 <td class="text small text-center">
-                    {{ post.author }}
+                    <!-- 클릭 시 유저 정보 -->
+                    <a href="{% url 'board:user_profile' post.author.id %}" class="text-light text-decoration-none">
+                        {{ post.author }}
+                    </a>
                 </td>
                 <!-- Create Date -->
                 <td class="text-muted text-center small">

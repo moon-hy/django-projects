@@ -2,6 +2,7 @@
 {%extends 'base.html'%}
 {%block content%}
 <div class="container border border-secondary rounded-3 container-fluid mt-5 p-5">
+    {{ post.update_hits }}
     {% include "board/post_form.html" %}
     {% include "board/comment_form.html" %}
     {% include "board/reply_form.html" %}
@@ -19,4 +20,5 @@
             location.href = $(this).data('uri');
         });
     });
+</script>
 {% endblock %}
