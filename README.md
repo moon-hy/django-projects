@@ -27,13 +27,19 @@
     -   추천/비추천 수 및 버튼
     -   댓글: 작성자, 내용, 작성 일시, 삭제 버튼
     -   댓글 다는 영역
--   생각나는 추가해야 할 사항
+
+2022.01.05
+![image](https://user-images.githubusercontent.com/94369511/148181875-2dbdaac2-4b20-49fe-bff9-58609fa29442.png)
 ![image](https://user-images.githubusercontent.com/94369511/148181938-52f1e00e-3a22-4fc7-b786-40b2a08efcf8.png)
+![image](https://user-images.githubusercontent.com/94369511/148182045-555633c1-a5ee-4f9f-aa23-e067e8ae1b48.png)
+
+-   추가한 내용
     -   댓글 알림
+    -   유저가 작성한 글/ 댓글 보기
+    -   게시륵에 이미지 삽입 가능
+
+-   TO DO
     -   대댓글
-    -   특정 유저가 작성한 글/댓글 보기
-    -   내 게시글 수, 댓글 수
     -   소셜 로그인 (OAuth)
     -   회원 탈퇴
-    -   게시글에 이미지
-      -   썸네일
+    -   썸네일
