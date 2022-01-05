@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.core.checks import messages
-from board.models import Post, Comment
+from board.models import Post, Comment, Notification, User
 from board.forms import CommentForm
 
 @login_required(login_url='common:login')
@@ -16,6 +16,12 @@ def comment_create(request, post_id):
                 content=request.POST.get('content'),
                 create_date=timezone.now()
             )
+            notification = Notification(user=post.author, post=post, invoke=request.user)
+            notification.save()
+            for query in post.comment_set.all().values('author').distinct():
+                target_user = User.objects.get(pk=query['author'])
+                if request.user != target_user:
+                    Notification(user=target_user, post=post, invoke=request.user).save()
             return redirect('board:detail', post_id=post_id)
     else:
         form = CommentForm()

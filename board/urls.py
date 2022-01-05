@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import base_views, comment_views, post_views
+from .views import base_views, comment_views, post_views, user_views
 
 app_name = 'board'
 
@@ -12,6 +12,12 @@ urlpatterns = [
         base_views.detail, name='detail'),
     # When use generic
     #path('<int:pk>/', views.DetailView.as_view()),
+
+    # user_views.py
+    path('user/<int:user_id>/profile/',
+        user_views.user_profile, name='user_profile'),
+    path('user/<int:user_id>/notification/',
+        user_views.user_notification, name='user_notification'),
 
     # comment_views.py
     path('comment/create/<int:post_id>/', 

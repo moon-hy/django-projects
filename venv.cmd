@@ -1,3 +1,3 @@
 @echo off
-cd F:/Git/django-projects/first-django
-./venv/Scripts/activate
+cd F:/Git/projects
+./venv-django/Scripts/activate

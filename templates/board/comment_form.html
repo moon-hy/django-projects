@@ -28,12 +28,12 @@
                 </dd>
             </div>
             <!-- Delete Icon -->
-            <div class="col-1 text-end pe-3">
+            <div class="col-1 text-end me-3">
                 {% if comment.author == request.user %}
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    <a type="button" class="btn text-white" data-bs-toggle="modal"
                         data-bs-target="#deleteComment">
                         <i class="far fa-trash-alt"></i>
-                    </button>
+                    </a>
                     <!-- Modal popup-->
                     <div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
