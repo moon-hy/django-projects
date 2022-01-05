@@ -15,7 +15,6 @@
             <a class="navbar-text ms-auto pe-3" tabindex="-1">
                 {% if user.profile.unread_notification %}
                     <a class="text-white text-decoration-none pe-3" href="{% url 'board:user_notification' user.id %}">
-<<<<<<< HEAD
                         <i class="far fa-bell fa-lg"></i>
                         <span class="badge bg-primary rounded">{{ user.profile.unread_notification }}</span>
                     </a>
@@ -25,14 +24,6 @@
                         <span class="badge bg-secondary rounded">{{ user.profile.unread_notification }}</span>
                     </a>
                 {% endif %}
-=======
-                {% else %}
-                    <a class="text-secondary text-decoration-none pe-3" href="{% url 'board:user_notification' user.id %}">
-                {% endif %}
-                        <i class="far fa-bell fa-lg"></i>
-                        <span class="badge bg-secondary rounded">{{ user.profile.unread_notification }}</span>
-                    </a>
->>>>>>> e1a209ef98766d6be043cd9f5a602bff9e180f83
             </a>
         {% endif %}
         <!-- Toggle Button -->
