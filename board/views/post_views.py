@@ -29,7 +29,7 @@ def post_modify(request, post_id):
     if request.user != post.author:
         messages.error(request, 'Permission error.')
         return redirect('board:detail', post_id=post_id)
-
+        
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():

@@ -1,14 +1,15 @@
 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{% url 'board:index' %}">
-            Home
+            홈
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active">
-            No href
+        <a class="nav-link active" aria-current="page" href="{% url 'board:user_profile' user.id %}">
+            프로필
         </a>
     </li>
+    <!--
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navigationBarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -20,4 +21,5 @@
             <li><a class="dropdown-item" href="#">dropdown-item3</a></li>
         </ul>
     </li>
+    -->
 </ul>
