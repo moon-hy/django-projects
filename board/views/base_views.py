@@ -4,6 +4,7 @@ from board.models import Post, Notification, User
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     page = request.GET.get('page', '1')
@@ -34,15 +35,18 @@ def index(request):
     context = {'posts': page_obj, 'page': page, 'kw': kw, 'so': so}
     return render(request, 'board/post_list.html', context)
 
+@login_required(login_url='common:login')
 def detail(request, post_id):
     try:
+        now = timezone.now()
         post = Post.objects.get(pk=post_id)
-        notifications = Notification.objects.filter(read_date__isnull=True).filter(user=request.user).filter(post=post)
+        notifications = request.user.notification.filter(read_date__isnull=True).filter(post=post)
+
         for notification in notifications:
-            notification.read_date = timezone.now()
+            notification.read_date = now
             notification.save()
     except:
         return redirect('board:index')
-    #post = get_object_or_404(Post, pk=post_id)
+
     context = {'post': post}
     return render(request, 'board/post_detail.html', context)

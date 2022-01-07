@@ -1,6 +1,6 @@
 <!-- Reply To -->
 <div class="container container-fluid border-top pt-3">
-    <form action="{% url 'board:comment_create' post.id %}" method="post">
+    <form id="replyForm" action="{% url 'board:comment_create' post.id %}" method="post">
         {% csrf_token %}
         {% include "form_errors.html" %}
         <!-- Header -->
@@ -10,7 +10,7 @@
             <div class="col-11">
                 <textarea 
                 {% if not user.is_authenticated %}disabled placeholder="Need login"{% endif %}
-                placeholder="Content" class="form-control" name="content" 
+                placeholder="Content" class="reply form-control" name="content" 
                 id="content" rows="3" style="resize: none;"></textarea>
             </div>
         </div>

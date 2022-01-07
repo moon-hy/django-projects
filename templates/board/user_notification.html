@@ -10,10 +10,10 @@
             <li class="list-group-item list-group-item-action list-group-item-dark">
                 {% if notification.read_date %}
                     <a class="text-decoration-none text-secondary" href="{% url 'board:detail' notification.post.id %}">
-                        글 {{ notification.post }} 에서 {{ notification.invoke }} 님이 댓글을 작성했습니다.
+                        글 {{ notification.post }} 에서 {{ notification.invoked_user }} 님이 댓글을 작성했습니다.
                 {% else %}
                     <a class="text-decoration-none text-dark strong" href="{% url 'board:detail' notification.post.id %}">
-                        <strong>글 {{ notification.post }} 에서 {{ notification.invoke }} 님이 댓글을 작성했습니다.</strong>
+                        <strong>글 {{ notification.post }} 에서 {{ notification.invoked_user }} 님이 댓글을 작성했습니다.</strong>
                 {% endif %}
                     <span class="text-end">{{ notification.create_date }}</span>
                 </a>
