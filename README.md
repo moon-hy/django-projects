@@ -4,11 +4,13 @@
 ### **구현 내용**
 
 #### **Model 정의**
-![image](https://user-images.githubusercontent.com/94369511/147909455-d868bcbf-39d9-40e3-b42b-c11193e0c5b1.png)
+
 ![django-board](https://user-images.githubusercontent.com/94369511/148603972-e46dac30-75a1-4f06-b5f4-12cbb9e3c982.png)
 
 #### **메인 화면**
+
 ![image](https://user-images.githubusercontent.com/94369511/147909437-beb12cb6-36e1-4816-8b30-e8a8696040c4.png)
+
 -   상단 바
     -   메인 화면으로 이동, 로그인/로그아웃, 메뉴 버튼
     -   메뉴 버튼: 오프캔버스 메뉴, 메뉴 리스트는 언제든지 쉽게 변경할 수 있도록 html 분리
@@ -21,6 +23,7 @@
     -   검색: 게시글, 내용, 작성자, 댓글에서 검색
 
 #### **게시글**
+
 ![image](https://user-images.githubusercontent.com/94369511/147909449-a5645445-7813-47c0-889f-07143894d440.png)
 
 -   게시글
@@ -31,7 +34,9 @@
     -   댓글 다는 영역
 
 2022.01.05
+
 ![image](https://user-images.githubusercontent.com/94369511/148216842-3a4f0ef7-c122-4380-bc13-682de65ba73b.png)
+
 ![image](https://user-images.githubusercontent.com/94369511/148216889-8b49f50f-3ef3-4bb7-826e-f562df8e8aaf.png)
 
 -   추가한 내용
@@ -49,6 +54,6 @@
 
 
 
-    -   대댓글
-    -   회원 탈퇴
-    -   썸네일
+-   대댓글
+-   회원 탈퇴
+-   썸네일
