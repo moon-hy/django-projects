@@ -5,6 +5,7 @@
 
 #### **Model 정의**
 ![image](https://user-images.githubusercontent.com/94369511/147909455-d868bcbf-39d9-40e3-b42b-c11193e0c5b1.png)
+![django-board](https://user-images.githubusercontent.com/94369511/148603972-e46dac30-75a1-4f06-b5f4-12cbb9e3c982.png)
 
 #### **메인 화면**
 ![image](https://user-images.githubusercontent.com/94369511/147909437-beb12cb6-36e1-4816-8b30-e8a8696040c4.png)
@@ -39,7 +40,15 @@
     -   게시글 수, 댓글 수
     -   게시글에 이미지 삽입
 
+
+
+2022.01.08
+-   수정한 내용
+    -   화면 크기에 따른 이미지 사이즈
+    -   댓글 입력 중 엔터키 입력시 댓글 등록, Shift+엔터키 입력시 줄바꿈
+
+
+
     -   대댓글
-    -   소셜 로그인 (OAuth)
     -   회원 탈퇴
     -   썸네일
