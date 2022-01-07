@@ -1,5 +1,6 @@
 __pycache__
-migrations
-db.sqlite3
 media/
-prod.py
+db.sqlite3
+migrations/
+!migrations/__init__.py
+*.pyc
