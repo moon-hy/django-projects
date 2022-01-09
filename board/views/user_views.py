@@ -1,11 +1,12 @@
-from os import X_OK
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from board.models import Post, Comment, Notification
 
+@login_required(login_url='common:login')
 def user_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     posts = Post.objects.filter(author=user).order_by('-create_date')
