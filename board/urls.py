@@ -10,8 +10,11 @@ urlpatterns = [
         base_views.index, name='index'),
     path('post/<int:post_id>/', 
         base_views.detail, name='detail'),
+    path('<str:category_url>/',
+        base_views.category, name='category'),
     # When use generic
     #path('<int:pk>/', views.DetailView.as_view()),
+
 
     # user_views.py
     path('user/<int:user_id>/profile/',

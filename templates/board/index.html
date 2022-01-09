@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container container-fluid">
+    {% for category in category_list %}
+    <br>
+        <div class="container-sm border rounded-3" style="max-width: 50%">
+            <div class="h5 pt-3">
+                {{ category.title }}
+            </div>
+            <table class="table table-dark align-middle">
+                <thead>
+                    <tr class="text-center">
+                        <th class="col-6 text-truncate">제목</th>
+                        <th class="col-2 text-truncate">글쓴이</th>
+                        <th class="col-2">작성일</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% if category.post_set.count > 0%}
+                    {% for post in category.post_set.all %}
+                        <tr>
+                            <td class="ps-3">{{ post.subject }}</td>
+                            <td class="text-center">{{ post.author }}</td>
+                            <td class="text-center">{{ post.create_date|date:'Y-m-d' }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No data.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+                <tfoot>
+                    <tr class="text-end">
+                        <td colspan="3">
+                            <a href="{% url 'board:category' category.url %}" class="text-decoration-none text-white">더 보기</a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

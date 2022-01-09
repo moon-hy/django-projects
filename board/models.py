@@ -28,7 +28,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Category(models.Model):
     title = models.CharField(max_length=20)
-    short_name = models.CharField(max_length=10)
+    url = models.CharField(max_length=10)
     class Meta:
             verbose_name_plural = "Categories"
 
