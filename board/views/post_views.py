@@ -12,13 +12,14 @@ from board.forms import PostForm
 def post_create(request, category_url):
     if request.method == 'POST':
         form = PostForm(request.POST)
+        category = Category.objects.get(url=category_url)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.category = Category.objects.get(url=category_url)
+            post.category = category
             post.create_date = timezone.now()
             post.save()
-            return redirect('board:index')
+            return redirect('board:category', category.url)
     else:
         form = PostForm()
     context = {'form': form}
@@ -55,21 +56,24 @@ def post_delete(request, post_id):
 @login_required(login_url='common:login')
 def post_like(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    # 이미 추천을 했으면 못하게 해야함 
-    # ManyToManyField는 중복 허용하지 않는다고 한다.
-    # if request.user in post.liked.user_set 필요없음
-    if request.user in post.liked.all():
-        messages.error(request, 'You already liked this post')
+    if request.user in post.disliked.all():
+        messages.error(request, "이미 비추천에 투표하였습니다.")
     else:
-        post.liked.add(request.user)
+        if request.user in post.liked.all():
+            post.liked.remove(request.user)
+        else:
+            post.liked.add(request.user)
     return redirect('board:detail', post_id=post_id)
 
 @login_required(login_url='common:login')
 def post_dislike(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    if request.user in post.disliked.all():
-        messages.error(request, 'You already disliked this post')
+    if request.user in post.liked.all():
+        messages.error(request, "이미 추천에 투표하였습니다.")
     else:
-        post.disliked.add(request.user)
+        if request.user in post.disliked.all():
+            post.disliked.remove(request.user)
+        else:
+            post.disliked.add(request.user)
     return redirect('board:detail', post_id=post_id)
 
