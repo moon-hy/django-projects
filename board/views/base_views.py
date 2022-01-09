@@ -14,8 +14,7 @@ def index(request):
         posts = Post.objects.filter(category=category).order_by('-create_date')[:5]
         post_list.append(posts)
 
-    print(dir(category_list[0].post_set))
-    context = {'category_list': category_list, 'post_list': post_list}
+    context = {'context': zip(category_list, post_list)}
     return render(request, 'board/index.html', context)
 
 
@@ -48,7 +47,7 @@ def category(request, category_url):
     paginator = Paginator(post_list, 10)
     page_obj = paginator.get_page(page)
 
-    context = {'posts': page_obj, 'page': page, 'kw': kw, 'so': so}
+    context = {'posts': page_obj, 'page': page, 'kw': kw, 'so': so, 'category': category}
     return render(request, 'board/post_list.html', context)
     
 '''

@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container container-fluid">
-    {% for category in category_list %}
+    {% for category, posts in context %}
     <br>
         <div class="container-sm border rounded-3" style="max-width: 50%">
             <div class="h5 pt-3">
@@ -19,9 +19,13 @@
                 
                 <tbody>
                     {% if category.post_set.count > 0%}
-                    {% for post in category.post_set.all %}
+                    {% for post in posts %}
                         <tr>
-                            <td class="ps-3">{{ post.subject }}</td>
+                            <td class="ps-3">
+                                <a href="{% url 'board:detail' post.id %}" class="text-decoration-none text-white">
+                                    {{ post.subject }}
+                                </a>
+                            </td>
                             <td class="text-center">{{ post.author }}</td>
                             <td class="text-center">{{ post.create_date|date:'Y-m-d' }}</td>
                         </tr>

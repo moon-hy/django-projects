@@ -3,18 +3,19 @@ from django.utils import timezone
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 
-from board.models import Post
+from board.models import Category, Post
 from board.forms import PostForm
 
 
 
 @login_required(login_url='common:login')
-def post_create(request):
+def post_create(request, category_url):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.category = Category.objects.get(url=category_url)
             post.create_date = timezone.now()
             post.save()
             return redirect('board:index')

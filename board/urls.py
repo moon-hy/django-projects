@@ -29,7 +29,7 @@ urlpatterns = [
         comment_views.comment_delete, name='comment_delete'),
 
     # post_views.py
-    path('post/create/',
+    path('<str:category_url>/post/create/',
         post_views.post_create, name='post_create'),
     path('post/modify/<int:post_id>/', 
         post_views.post_modify, name='post_modify'),
