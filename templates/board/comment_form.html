@@ -39,13 +39,13 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-dark" id="modifyModalLabel">Are you sure ?</h5>
+                                    <h5 class="modal-title text-dark" id="modifyModalLabel">정말 삭제 하시겠습니까?</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                                     <a class="btn btn-primary"
-                                        href="{% url 'board:comment_delete' comment.id  %}">Yes</a>
+                                        href="{% url 'board:comment_delete' comment.id  %}">네</a>
                                 </div>
                             </div>
                         </div>

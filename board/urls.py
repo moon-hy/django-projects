@@ -10,8 +10,11 @@ urlpatterns = [
         base_views.index, name='index'),
     path('post/<int:post_id>/', 
         base_views.detail, name='detail'),
+    path('<str:category_url>/',
+        base_views.category, name='category'),
     # When use generic
     #path('<int:pk>/', views.DetailView.as_view()),
+
 
     # user_views.py
     path('user/<int:user_id>/profile/',
@@ -26,7 +29,7 @@ urlpatterns = [
         comment_views.comment_delete, name='comment_delete'),
 
     # post_views.py
-    path('post/create/',
+    path('<str:category_url>/post/create/',
         post_views.post_create, name='post_create'),
     path('post/modify/<int:post_id>/', 
         post_views.post_modify, name='post_modify'),

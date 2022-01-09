@@ -12,7 +12,7 @@
             </select>
         </div>
         <div class="col text-end pb-3">
-            <a href="{%url 'board:post_create'%}" class="btn btn-primary">글쓰기</a>
+            <a href="{% url 'board:post_create' category.url %}" class="btn btn-primary">글쓰기</a>
         </div>
     </div>
     <table class="table table-hover table-dark">
@@ -80,14 +80,14 @@
     <!-- Search input/btn -->
     <div class="row my-3">
         <div class="col-4 start-50 translate-middle-x input-group" style="width: 400px">
-            <input type="text" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+            <input type="text" class="search form-control kw" value="{{ kw|default_if_none:'' }}">
             <div class="input-group-append">
                 <button class="btn btn-outline-light" type="button" id="btn_search">Search</button>
             </div>
         </div>
     </div>
     <!-- Search Form -->
-    <form id="searchForm" method="get" action="{% url 'index' %}">
+    <form id="searchForm" method="get" action="{% url 'board:category' category.url %}">
         <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
         <input type="hidden" id="page" name="page" value="{{ page }}">
         <input type="hidden" id="so" name="so" value="{{ so }}">
@@ -116,6 +116,13 @@
             $("#page").val(1);
             $("#searchForm").submit();
         });
+        $('.search').on('keydown', function(event){
+            if(event.keyCode==13){
+                $('#kw').val($('.kw').val());
+                $('#page').val(1);
+                $('#searchForm').submit();
+            }
+        })
     });
 </script>
 {% endblock %}

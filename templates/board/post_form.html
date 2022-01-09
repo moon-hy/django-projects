@@ -21,30 +21,32 @@
     {% endif %}
 <!-- Author, Modify/Delete -->
 <span class="small text">
-    <span class="text-muted">Author:</span> 
+    <span class="text-muted">글쓴이:</span> 
     {{ post.author }} 
 
     {% if post.author == request.user %}    
     <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
         data-bs-target="#postModify">
-        Modify
+        수정
     </button>
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
         data-bs-target="#postDelete">
-        Delete
+        삭제
     </button>
     <!-- Modal popup-->
     <div class="modal fade" id="postModify" tabindex="-1" aria-labelledby="postModifyLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-dark" id="postModifyLabel">Are you sure ?</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+              <h5 class="modal-title text-dark" id="postModifyLabel">정말 수정 하시겠습니까?</h5>
+            </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
               <a class="btn btn-primary"
-              href="{% url 'board:post_modify' post.id  %}">Yes</a>
+              href="{% url 'board:post_modify' post.id  %}">네</a>
             </div>
           </div>
         </div>
@@ -53,13 +55,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-dark" id="postDeleteLabel">Are you sure ?</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+              <h5 class="text-dark" id="postDeleteLabel">정말 삭제 하시겠습니까?</h5>
+            </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
               <a class="btn btn-primary"
-              href="{% url 'board:post_delete' post.id  %}">Yes</a>
+              href="{% url 'board:post_delete' post.id  %}">네<sp></a>
             </div>
           </div>
         </div>

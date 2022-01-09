@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import timedelta, datetime, timezone
 
 
 class Profile(models.Model):
@@ -26,9 +27,18 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=20)
+    url = models.CharField(max_length=10)
+    class Meta:
+            verbose_name_plural = "Categories"
+    def __str__(self):
+        return self.title
+
 class Post(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.SET('Deleted:User'), related_name='author_post')
-    subject = models.CharField(max_length=100)
+    subject = models.CharField(max_length=50)
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
@@ -36,13 +46,17 @@ class Post(models.Model):
     disliked = models.ManyToManyField(User, related_name='disliked_post')
     hits = models.PositiveIntegerField(default=0)
 
-    def __str__(self):
-        return self.subject
-
     @property
+    def is_recent(self):
+        return (datetime.now(timezone.utc) - self.create_date) < timedelta(days=1)
+
     def update_hits(self):
         self.hits += 1
         self.save()
+        return ''
+        
+    def __str__(self):
+        return self.subject
 
 
 class Comment(models.Model):
