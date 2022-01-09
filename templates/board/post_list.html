@@ -39,6 +39,9 @@
                 <td>
                     <a href="{% url 'board:detail' post.id %}" class="text-light text-decoration-none">
                         {{ post.subject }}
+                        {% if post.is_recent %}
+                            <i class="fas fa-exclamation fa-xsm" style="color:orange"></i>
+                        {% endif %}
                     </a>
                     <!-- Comment count -->
                     {% if post.comment_set.count > 0 %}
