@@ -26,7 +26,14 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=20)
+    short_name = models.CharField(max_length=10)
+    class Meta:
+            verbose_name_plural = "Categories"
+
 class Post(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.SET('Deleted:User'), related_name='author_post')
     subject = models.CharField(max_length=100)
     content = models.TextField()
