@@ -50,10 +50,10 @@ class Post(models.Model):
     def is_recent(self):
         return (datetime.now(timezone.utc) - self.create_date) < timedelta(days=1)
 
-    @property
     def update_hits(self):
         self.hits += 1
         self.save()
+        return ''
         
     def __str__(self):
         return self.subject
