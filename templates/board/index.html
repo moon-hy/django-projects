@@ -4,10 +4,11 @@
 <div class="container container-fluid">
     {% for category, posts in context %}
     <br>
-        <div class="container-sm border rounded-3" style="max-width: 50%">
+        <div class="container-sm container-fluid border rounded-3">
             <div class="h5 pt-3">
                 {{ category.title }}
             </div>
+            <div>
             <table class="table table-dark align-middle">
                 <thead>
                     <tr class="text-center">
@@ -21,16 +22,16 @@
                     {% if category.post_set.count > 0%}
                     {% for post in posts %}
                         <tr>
-                            <td class="ps-3">
+                            <td class="ps-3 text-truncate" style="max-width: 150px">
+                                {% if post.is_recent %}
+                                    <i class="fas fa-exclamation fa-xsm" style="color:orange"></i>
+                                {% endif %}
                                 <a href="{% url 'board:detail' post.id %}" class="text-decoration-none text-white">
                                     {{ post.subject }}
                                     {% if post.comment_set.count > 0 %}
                                         <span class="text-danger small ml-2">
                                             [{{ post.comment_set.count }}]
                                         </span>
-                                    {% endif %}
-                                    {% if post.is_recent %}
-                                        <i class="fas fa-exclamation fa-xsm" style="color:orange"></i>
                                     {% endif %}
                                 </a>
                             </td>
@@ -52,6 +53,7 @@
                     </tr>
                 </tfoot>
             </table>
+        </div>
         </div>
     {% endfor %}
 </div>
