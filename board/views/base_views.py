@@ -1,6 +1,6 @@
 from django.core.checks import messages
 from django.utils import timezone
-from board.models import Post, Category
+from board.models import Post, Category, Comment
 from django.db.models import Q, Count
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
@@ -55,14 +55,19 @@ def category(request, category_url):
 def detail(request, post_id):
     try:
         now = timezone.now()
-        post = Post.objects.get(pk=post_id)
+        # 수정
+        post = Post.objects.prefetch_related('comment_set').get(pk=post_id)
+        comments = Comment.objects.filter(post=post).select_related('author')
+
         notifications = request.user.notification.filter(read_date__isnull=True).filter(post=post)
 
         for notification in notifications:
             notification.read_date = now
             notification.save()
-    except:
+            
+    except Exception as e:
+        print(e)
         return redirect('board:index')
 
-    context = {'post': post}
+    context = {'post': post, 'comments': comments}
     return render(request, 'board/post_detail.html', context)
