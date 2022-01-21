@@ -8,7 +8,7 @@
 
     <!-- Comment Items -->
     {% if post.comment_set.count %}
-        {%for comment in post.comment_set.all%}
+        {%for comment in comments %}
         <dl class="row rounded-3 border-bottom py-3" style="background: #333333;">
             <!-- if click Comment, Reply -->
             <div class="col row position-relative">

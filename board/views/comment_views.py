@@ -15,16 +15,16 @@ def comment_create(request, post_id):
 
             comment = Comment(post=post, author=request.user, content=request.POST.get('content'), create_date=now)
             comment.save()
+            
+            Notification(user=post.author, post=post, comment=comment, create_date=now).save()
+            # 수정 postgresql migrate -> distinct on 가능
+            activities = Comment.objects.filter(post=post)\
+                .exclude(author__in=[request.user,post.author])\
+                    .distinct('author')\
+                        .select_related('author')
 
-            notification = Notification(user=post.author, post=post, comment=comment, create_date=now)
-            notification.save()
-
-            for query in post.comment_set.all()\
-                        .exclude(author=request.user)\
-                        .exclude(author=post.author)\
-                        .values('author').distinct():
-                target_user = User.objects.get(pk=query['author'])
-                Notification(user=target_user, post=post, comment=comment, create_date=now).save()
+            for activity in activities:
+                Notification(user=activity.author, post=post, comment=comment, create_date=now).save()
 
             return redirect('board:detail', post_id=post_id)
 
@@ -44,13 +44,3 @@ def comment_delete(request, comment_id):
 
     comment.delete()
     return redirect('board:detail', post_id=comment.post.id)
-
-'''
-@login_required(login_url='common:login')
-def comment_like(request, comment_id):
-    pass
-
-@login_required(login_url='common:login')
-def comment_dislike(request, comment_id):
-    pass
-'''
